@@ -41,3 +41,14 @@ yarn-error.log*
 next-env.d.ts
 
 /app/generated/prisma
+
+# .gitignore
+node_modules/
+.next/
+.env
+.env.local
+.env.production
+*.log
+.DS_Store
+bun.lockb
+dist/
