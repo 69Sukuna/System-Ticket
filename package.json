@@ -9,7 +9,10 @@
   "prisma": {
     "seed": "bun run prisma/seed.js"
   },
-  "scripts": {
-    "seed": "bun run prisma/seed.js"
-  }
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "seed": "node prisma/seed.js"
+}
 }

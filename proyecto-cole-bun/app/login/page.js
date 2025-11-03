@@ -1,19 +1,17 @@
-"use client";
+'use client';
+
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import LoginForm from "../../components/LoginForm";
 import RegisterForm from "../../components/RegisterForm";
 
-export default function AuthPage() {
+export default function LoginPage() {
   const searchParams = useSearchParams();
-  const mode = searchParams.get('mode');
-  
-  // Si mode=register, mostrar registro por defecto
-  const [showLogin, setShowLogin] = useState(mode !== 'register');
+  const mode = searchParams.get("mode");
+  const [showLogin, setShowLogin] = useState(mode !== "register");
 
-  // Actualizar cuando cambie el parámetro de URL
   useEffect(() => {
-    setShowLogin(mode !== 'register');
+    setShowLogin(mode !== "register");
   }, [mode]);
 
   return (
