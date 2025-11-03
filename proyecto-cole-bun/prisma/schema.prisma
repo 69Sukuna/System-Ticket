@@ -1,0 +1,66 @@
+// This is your Prisma schema file
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("user") // "admin", "user", "eventManage"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relaciones
+  tickets   Ticket[]
+  
+  @@map("users")
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  date        String   // O DateTime si prefieres
+  location    String
+  description String
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Información de entradas
+  ticketTypes Json     // Almacena array de tipos de entradas
+  
+  // Relaciones
+  tickets     Ticket[]
+  
+  @@map("events")
+}
+
+model Ticket {
+  id          String   @id @default(cuid())
+  eventTitle  String
+  date        String
+  price       Float
+  quantity    Int
+  purchasedAt Float    // Timestamp en milisegundos
+  createdAt   DateTime @default(now())
+  
+  // Relaciones
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  eventId     Int
+  event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  
+  @@map("tickets")
+  @@index([userId])
+  @@index([eventId])
+}

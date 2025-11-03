@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@prisma/client": "^6.18.0"
+  },
+  "devDependencies": {
+    "prisma": "^6.18.0"
+  },
+  "type": "module",
+  "prisma": {
+    "seed": "bun run prisma/seed.js"
+  },
+  "scripts": {
+    "seed": "bun run prisma/seed.js"
+  }
+}
